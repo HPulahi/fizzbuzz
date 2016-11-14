@@ -19,6 +19,16 @@ RSpec.describe Api::V1::PagesController, type: :controller do
       expect(response_body.size).to eq(params[:page_size])
     end
 
+    it "returns an array of Hashes" do
+      response_body = JSON.parse(response.body, symbolize_names: true)
+      expect(response_body.first).to be_an(Hash)
+      expect(response_body).to include({value: 1, result: nil})
+      expect(response_body).to include({value: 3, result: "Fizz"})
+      expect(response_body).to include({value: 5, result: "Buzz"})
+    end
+
+
+
   end
 
 end

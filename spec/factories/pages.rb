@@ -3,7 +3,8 @@ FactoryGirl.define do
   end
 
   factory :params, class:Hash do
-    page_size  10
+    page_num     3
+    page_size   10
     initialize_with { attributes }
   end
 end

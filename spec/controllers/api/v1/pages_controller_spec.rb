@@ -5,29 +5,27 @@ RSpec.describe Api::V1::PagesController, type: :controller do
   let(:params) { FactoryGirl.attributes_for(:params, page_size: 10) }
 
   describe "GET #show" do
+
     before(:each) do
       get :show, params: { page: params }, format: :json
     end
 
+    subject { JSON.parse(response.body, symbolize_names: true) }
+
     it "returns an array" do
-      response_body = JSON.parse(response.body, symbolize_names: true)
-      expect(response_body).to be_an(Array)
+      expect(subject).to be_an(Array)
     end
 
     it "returns the user defined quantity of items" do
-      response_body = JSON.parse(response.body, symbolize_names: true)
-      expect(response_body.size).to eq(params[:page_size])
+      expect(subject.size).to eq(params[:page_size])
     end
 
     it "returns an array of Hashes" do
-      response_body = JSON.parse(response.body, symbolize_names: true)
-      expect(response_body.first).to be_an(Hash)
-      expect(response_body).to include({value: 1, result: nil})
-      expect(response_body).to include({value: 3, result: "Fizz"})
-      expect(response_body).to include({value: 5, result: "Buzz"})
+      expect(subject.first).to be_an(Hash)
+      expect(subject).to include({value: 1, result: nil})
+      expect(subject).to include({value: 3, result: "Fizz"})
+      expect(subject).to include({value: 5, result: "Buzz"})
     end
-
-
 
   end
 

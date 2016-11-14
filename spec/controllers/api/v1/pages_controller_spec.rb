@@ -5,7 +5,6 @@ RSpec.describe Api::V1::PagesController, type: :controller do
   let(:params) { FactoryGirl.attributes_for(:params, page_size: 10) }
 
   describe "GET #show" do
-
     before(:each) do
       get :show, params: { page: params }, format: :json
     end
@@ -26,7 +25,5 @@ RSpec.describe Api::V1::PagesController, type: :controller do
       expect(subject).to include({value: 3, result: "Fizz"})
       expect(subject).to include({value: 5, result: "Buzz"})
     end
-
   end
-
 end
